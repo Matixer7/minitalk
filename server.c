@@ -57,7 +57,7 @@ void	signal_handler(int sig)
 	bin[len + 1] = '\0';
 	if(ft_strlen(bin) == 8)
 		print_ascii();
-	//ft_printf("Received SIGNT: %d\n%c\n", sig, c);	
+	ft_printf("Received SIGNT: %d\n%c\n", sig, c);	
 	//exit(0);
 }
 
