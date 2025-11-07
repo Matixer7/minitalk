@@ -24,7 +24,7 @@ void	send_signal (char *binary, pid_t server_pid )
 
 	i = 0;
 	len = ft_strlen(binary);
-	while (i < len)
+	while (i < 8)
 	{
 		if (binary[i] == '1')
 			kill(server_pid, SIGUSR1);
@@ -41,9 +41,9 @@ void	ascii_to_binary (int c, pid_t server_pid)
 	int i;
 	
 	i = 0;
-	while (c != 0)
+	while (i < 8)
 	{
-		binary[i] = c % 2 + '0';
+		binary[7 - i] = c % 2 + '0';
 		c = c / 2;
 		i++;
 	}
@@ -59,10 +59,11 @@ int main(int argc, char **argv)
 	
 	if (!argv[1] || !ft_atoi(argv[1]))
 		return (ft_printf("Wrong PID format or no PID given"));
+	server_pid = ft_atoi(argv[1]);
 	if (!argv[2])
 		return (ft_printf("Nothing to send :c"));
 	i = 0;
-	j = 0;
+	j = 2;
 	while(argv[j])
 	{
 		while (argv[j][i])
@@ -71,6 +72,8 @@ int main(int argc, char **argv)
 			i++;
 		}
 		j++;
+		ascii_to_binary(' ', server_pid);
+		i = 0;
 	}
 	return (0);
 }

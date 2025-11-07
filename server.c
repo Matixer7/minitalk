@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:13 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/06 18:52:42 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/08 00:33:23 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 char bin[9];
 
-int	convert_binary_to_ascii()
+int	convert_binary_to_ascii(char *binary)
 {
 	int	i;
 	int	ascii;
@@ -28,9 +28,10 @@ int	convert_binary_to_ascii()
 	ascii = 0;
 	while (i < 8)
 	{
-		ascii = ascii * 2 + (bin[i] - '0');
+		ascii = ascii * 2 + (binary[i] - '0');
 		i++;
 	}
+	//ft_printf("****%d****", ascii);
 	return (ascii);
 }
 
@@ -38,8 +39,8 @@ void	print_ascii()
 {
 	char c;
 
-	c = (char)convert_binary_to_ascii();
-	write(1, &c, 1);
+	c = (char)convert_binary_to_ascii(bin);
+	ft_printf("%c", c);
 	bin[0] = '\0';
 }
 
@@ -57,7 +58,7 @@ void	signal_handler(int sig)
 	bin[len + 1] = '\0';
 	if(ft_strlen(bin) == 8)
 		print_ascii();
-	ft_printf("Received SIGNT: %d\n%c\n", sig, c);	
+	//ft_printf("Received SIGNT: %d\n%c\n", sig, c);	
 	//exit(0);
 }
 
@@ -73,14 +74,10 @@ int main(int argc, char const **argv)
 	signal(SIGUSR2, signal_handler);
 	//signal(SIGTERM, signal_handler);
 
-	int i = 0;
 	while (1)
 	{
-		i++;
-		i--;
+		//pause()
 	}
-	
-	
 	
 	return (0);
 }
