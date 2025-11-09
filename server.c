@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:13 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/08 00:33:23 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/08 12:04:55 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	convert_binary_to_ascii(char *binary)
 		ascii = ascii * 2 + (binary[i] - '0');
 		i++;
 	}
-	//ft_printf("****%d****", ascii);
 	return (ascii);
 }
 
@@ -58,8 +57,6 @@ void	signal_handler(int sig)
 	bin[len + 1] = '\0';
 	if(ft_strlen(bin) == 8)
 		print_ascii();
-	//ft_printf("Received SIGNT: %d\n%c\n", sig, c);	
-	//exit(0);
 }
 
 int main(int argc, char const **argv)
@@ -69,14 +66,12 @@ int main(int argc, char const **argv)
 	pid = getpid();
 	ft_printf("Server Process ID (PID): %d\n", pid);
 	
-	//signal(SIGINT, signal_handler);
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
-	//signal(SIGTERM, signal_handler);
 
 	while (1)
 	{
-		//pause()
+		pause();
 	}
 	
 	return (0);

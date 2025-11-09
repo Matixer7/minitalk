@@ -58,22 +58,29 @@ int main(int argc, char **argv)
 	int j;
 	
 	if (!argv[1] || !ft_atoi(argv[1]))
-		return (ft_printf("Wrong PID format or no PID given"));
+		return (ft_printf("Wrong PID format or no PID given\n"));
 	server_pid = ft_atoi(argv[1]);
 	if (!argv[2])
-		return (ft_printf("Nothing to send :c"));
+		return (ft_printf("Nothing to send :c\n"));
 	i = 0;
 	j = 2;
 	while(argv[j])
 	{
 		while (argv[j][i])
 		{
-			ascii_to_binary(argv[j][i], server_pid);
+			if (ft_isascii(argv[j][i]))
+				ascii_to_binary(argv[j][i], server_pid);
+			else
+			{
+				ascii_to_binary('?', server_pid);
+				ft_printf("Error: found something not from ASCII, replaced with question mark\n");
+			}
 			i++;
 		}
 		j++;
 		ascii_to_binary(' ', server_pid);
 		i = 0;
 	}
+	ascii_to_binary('\n', server_pid);
 	return (0);
 }
