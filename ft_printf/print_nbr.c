@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   print_nbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 18:26:56 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/10/15 19:02:44 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/09 12:51:35 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	count_digits(int n)
+static int	count_digits(int n)
 {
 	int	i;
 

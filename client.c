@@ -17,25 +17,30 @@
 #include <signal.h>
 #include <stdlib.h>
 
-void	send_signal (char *binary, pid_t server_pid )
+int	send_signal (char *binary, pid_t server_pid )
 {
 	int i;
-	int len;
 
 	i = 0;
-	len = ft_strlen(binary);
 	while (i < 8)
 	{
 		if (binary[i] == '1')
-			kill(server_pid, SIGUSR1);
+		{
+			if (kill(server_pid, SIGUSR1) == -1)
+				return(-1);
+		}
 		if (binary[i] == '0')
-			kill(server_pid, SIGUSR2);
+		{
+			if (kill(server_pid, SIGUSR2) == -1)
+				return(-1);
+		}
 		usleep(50);
 		i++;
 	}
+	return (0);
 }
 
-void	ascii_to_binary (int c, pid_t server_pid)
+int	ascii_to_binary (int c, pid_t server_pid)
 {
 	char binary[9];
 	int i;
@@ -48,7 +53,9 @@ void	ascii_to_binary (int c, pid_t server_pid)
 		i++;
 	}
 	binary[8] = '\0';
-	send_signal(binary, server_pid);
+	if (send_signal(binary, server_pid) == -1)
+		return(-1);
+	return(0);
 }
 
 int main(int argc, char **argv)
@@ -57,10 +64,10 @@ int main(int argc, char **argv)
 	int i;
 	int j;
 	
-	if (!argv[1] || !ft_atoi(argv[1]))
+	if (!argv[1] || !ft_atoi(argv[1]) || ft_atoi(argv[1]) <= 0)
 		return (ft_printf("Wrong PID format or no PID given\n"));
 	server_pid = ft_atoi(argv[1]);
-	if (!argv[2])
+	if (argc <= 2)
 		return (ft_printf("Nothing to send :c\n"));
 	i = 0;
 	j = 2;
@@ -69,18 +76,25 @@ int main(int argc, char **argv)
 		while (argv[j][i])
 		{
 			if (ft_isascii(argv[j][i]))
-				ascii_to_binary(argv[j][i], server_pid);
+			{
+				if (ascii_to_binary(argv[j][i], server_pid) == -1)
+					return (ft_printf("Error has occured while sending\n"));
+			}
 			else
 			{
-				ascii_to_binary('?', server_pid);
+				if (ascii_to_binary('?', server_pid) == -1)
+					return (ft_printf("Error has occured while sending\n"));
 				ft_printf("Error: found something not from ASCII, replaced with question mark\n");
+				i++;
 			}
 			i++;
 		}
 		j++;
-		ascii_to_binary(' ', server_pid);
+		if (ascii_to_binary(' ', server_pid) == -1)
+			return (ft_printf("Error has occured while sending\n"));
 		i = 0;
 	}
-	ascii_to_binary('\n', server_pid);
+	if( ascii_to_binary('\n', server_pid) == -1)
+		return (ft_printf("Error has occured while sending\n"));
 	return (0);
 }

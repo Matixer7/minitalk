@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:13 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/08 12:04:55 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/09 13:40:18 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	signal_handler(int sig)
 		print_ascii();
 }
 
-int main(int argc, char const **argv)
+int main()
 {
 	pid_t	pid;
 
