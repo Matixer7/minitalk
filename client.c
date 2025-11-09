@@ -6,7 +6,7 @@
 /*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:11 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/09 14:04:47 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/09 14:53:08 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	send_signal(char *binary, pid_t server_pid )
 			if (kill(server_pid, SIGUSR2) == -1)
 				return (-1);
 		}
-		usleep(50);
 		i++;
 	}
 	return (0);
@@ -60,7 +59,7 @@ int	ascii_to_binary(int c, pid_t server_pid)
 
 int	validate_and_send_msg(char *argv, pid_t server_pid)
 {
-	int	i;
+	ssize_t	i;
 
 	i = 0;
 	while (argv[i])
