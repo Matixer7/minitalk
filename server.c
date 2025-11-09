@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:13 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/09 13:40:18 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/09 14:32:52 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	convert_binary_to_ascii(char *binary)
 	return (ascii);
 }
 
-void	print_ascii()
+void	print_ascii(void)
 {
-	char c;
+	char	c;
 
 	c = (char)convert_binary_to_ascii(bin);
 	ft_printf("%c", c);
@@ -47,7 +47,7 @@ void	signal_handler(int sig)
 {
 	char	c;
 	int		len;
-	
+
 	len = ft_strlen(bin);
 	if (sig == SIGUSR1)
 		c = '1';
@@ -55,24 +55,19 @@ void	signal_handler(int sig)
 		c = '0';
 	bin[len] = c;
 	bin[len + 1] = '\0';
-	if(ft_strlen(bin) == 8)
+	if (ft_strlen(bin) == 8)
 		print_ascii();
 }
 
-int main()
+int	main(void)
 {
 	pid_t	pid;
 
 	pid = getpid();
 	ft_printf("Server Process ID (PID): %d\n", pid);
-	
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
-
 	while (1)
-	{
-		pause();
-	}
-	
+		;
 	return (0);
 }
