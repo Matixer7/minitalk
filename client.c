@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgumienn <mgumienn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgumienn <mgumienn@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 17:03:11 by mgumienn          #+#    #+#             */
-/*   Updated: 2025/11/10 18:21:54 by mgumienn         ###   ########.fr       */
+/*   Updated: 2025/11/10 19:10:49 by mgumienn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	send_signal(char *binary, pid_t server_pid )
 				return (-1);
 		}
 		i++;
-		usleep(5);
+		usleep(20);
 	}
 	return (0);
 }
